@@ -1,17 +1,14 @@
 
--- (Re)create the tables
+-- Clear the tables if they already exists
 
-DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS favorites;
 
-CREATE TABLE students (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(20) NOT NULL,
-    last_name VARCHAR(20) NOT NULL
+
+CREATE TABLE `favorites`(
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `spotify_id` VARCHAR(255) NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `description` TEXT NOT NULL,
+    `cover_image` VARCHAR(255) NOT NULL,
+    `rating` INT UNSIGNED NOT NULL
 );
-
--- Insert some sample data
-
-INSERT INTO students (first_name, last_name)
-VALUES
-    ("Student1First", "Student1Last"),
-    ("Student2First", "Student2Last");

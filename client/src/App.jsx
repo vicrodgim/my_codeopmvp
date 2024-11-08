@@ -1,12 +1,16 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { NavBar } from "./components/NavBar/NavBar";
+import { SearchPage } from "./pages/SearchPage";
+// import { FavoritesPage } from "./pages/FavoritesPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <>Hello from react </>;
+  return (
+    <div>
+      <NavBar />
+      <SearchPage />
+      {/* <FavoritesPage /> */}
+    </div>
+  );
 }
 
 export default App;

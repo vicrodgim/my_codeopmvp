@@ -41,7 +41,7 @@ const getAccessToken = async (req, res) => {
 const searchPodcasts = async (req, res) => {
   //query parameters
   const { topic, market } = req.query;
-  console.log(req.query);
+  // console.log(req.query);
   //first, access token must be fetched
   try {
     const responseToken = await axios.get(
@@ -69,8 +69,8 @@ const searchPodcasts = async (req, res) => {
 
     res.json(spotifyResponse.data.shows.items);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("could not fetch podcasts from Spotify");
+    console.error("Error searching for podcast:", error);
+    res.status(500).send("Could not fetch podcasts from Spotify");
   }
 };
 

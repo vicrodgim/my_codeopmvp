@@ -7,7 +7,7 @@ const {
   getPodcast,
   addRating,
   deletePodcast,
-} = require("../controllers/favouriteController");
+} = require("../controllers/favoriteController");
 
 //adds podcasts to favorite list
 router.post("/", addPodcast);

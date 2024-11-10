@@ -5,7 +5,7 @@ var logger = require("morgan");
 const cors = require("cors");
 
 var spotifyRoutes = require("./routes/spotifyRoutes");
-var favouritesRoutes = require("./routes/favouritesRoutes");
+var favoritesRoutes = require("./routes/favoritesRoutes");
 
 var app = express();
 
@@ -17,6 +17,6 @@ app.use(cors());
 // app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/spotify", spotifyRoutes);
-app.use("/api/favourites", favouritesRoutes);
+app.use("/api/favorites", favoritesRoutes);
 
 module.exports = app;

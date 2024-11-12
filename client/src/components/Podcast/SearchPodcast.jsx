@@ -1,5 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import "./SearchPodcast.css";
 
 export const SearchPodcast = ({ setPodcasts }) => {
   const [topic, setTopic] = useState("");
@@ -30,30 +37,55 @@ export const SearchPodcast = ({ setPodcasts }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            placeholder="Enter topic of interest"
-            value={topic}
-            onChange={(event) => {
-              setTopic(event.target.value);
-            }}
-          />
-        </div>
+      <Container className="large-margin">
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-1 justify-content-center">
+            <Col md={6}>
+              <FloatingLabel
+                controlId="formTopic"
+                label="Topic of Interest"
+                className="mb-3"
+              >
+                <Form.Control
+                  type="text"
+                  placeholder="topic of interest"
+                  value={topic}
+                  onChange={(event) => {
+                    setTopic(event.target.value);
+                  }}
+                />
+              </FloatingLabel>
+            </Col>
+          </Row>
 
-        <div>
-          <input
-            placeholder="Enter a country"
-            value={country}
-            onChange={(event) => {
-              setCountry(event.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <button type="submit">Search</button>
-        </div>
-      </form>
+          <Row className="mb-1 justify-content-center">
+            <Col md={6}>
+              <FloatingLabel
+                controlId="formCountry"
+                label="Country"
+                className="mb-3"
+              >
+                <Form.Control
+                  type="text"
+                  placeholder="Enter a country"
+                  value={country}
+                  onChange={(event) => {
+                    setCountry(event.target.value);
+                  }}
+                />
+              </FloatingLabel>
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center">
+            <Col md="auto">
+              <Button variant="outline-success" size="lg" type="submit">
+                Search
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </div>
   );
 };

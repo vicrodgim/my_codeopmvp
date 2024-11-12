@@ -9,7 +9,7 @@ export const SearchPage = () => {
   const [selectedPodcast, setSelectedPodcast] = useState(null);
 
   const handlePodcastClick = (podcast) => {
-    console.log("selected podcast:", podcast);
+    // console.log("selected podcast:", podcast);
 
     setSelectedPodcast(podcast);
   };

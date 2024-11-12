@@ -27,9 +27,15 @@ export const FavoritesPage = () => {
 
   const postRating = async (id, rating) => {
     try {
-      const response = await axios.post(
-        `http://localhost:4000/api/favorites/${id}`,
-        { rating: rating }
+      const response = await axios.put(
+        `http://localhost:4000/api/favorites/${id}/rating`,
+        { rating },
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -43,9 +49,7 @@ export const FavoritesPage = () => {
       //update  favorites podcast with  rating
       setFavorites((oldFavorites) =>
         oldFavorites.map((podcast) =>
-          podcast.id === id
-            ? { ...podcast, rating: updatedPodcast.rating }
-            : podcast
+          podcast.id === id ? { ...podcast, rating } : podcast
         )
       );
       alert("Rating has been updated!");

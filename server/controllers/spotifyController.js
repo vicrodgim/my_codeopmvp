@@ -43,6 +43,7 @@ const searchPodcasts = async (req, res) => {
   const { topic, market } = req.query;
   // console.log(req.query);
   //first, access token must be fetched
+  console.log("aaa");
   try {
     const responseToken = await axios.get(
       "http://localhost:4000/api/spotify/token"
@@ -51,6 +52,8 @@ const searchPodcasts = async (req, res) => {
     // console.log(responseToken.data);
 
     const accessToken = responseToken.data.accessToken;
+
+    console.log(accessToken);
 
     const spotifyResponse = await axios.get(
       "https://api.spotify.com/v1/search",
@@ -66,6 +69,8 @@ const searchPodcasts = async (req, res) => {
         },
       }
     );
+
+    console.log(spotifyResponse);
 
     res.json(spotifyResponse.data.shows.items);
   } catch (error) {

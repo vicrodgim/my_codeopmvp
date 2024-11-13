@@ -14,12 +14,18 @@ export const NavBar = () => {
         className="bg-body-tertiary"
       >
         <Container>
-          <Navbar.Brand href="#home">InTheLoop</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            InTheLoop
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#search">Search</Nav.Link>
-              <Nav.Link href="#favorites">Favorites</Nav.Link>
+              <Nav.Link as={Link} to="/">
+                Search
+              </Nav.Link>
+              <Nav.Link as={Link} to="/favorites">
+                Favorites
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

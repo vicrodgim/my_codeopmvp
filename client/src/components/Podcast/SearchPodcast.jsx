@@ -31,7 +31,7 @@ export const SearchPodcast = ({ setPodcasts }) => {
       setTopic("");
       setCountry("");
     } catch (error) {
-      console.error("podcasts could not be fetched:", error);
+      console.error("Podcasts could not be fetched:", error);
     }
   };
 
@@ -40,11 +40,11 @@ export const SearchPodcast = ({ setPodcasts }) => {
       <Container className="large-margin">
         <Form onSubmit={handleSubmit}>
           <Row className="mb-1 justify-content-center">
-            <Col md={6}>
+            <Col md={5}>
               <FloatingLabel
                 controlId="formTopic"
                 label="Topic of Interest"
-                className="mb-3"
+                className="mb-2"
               >
                 <Form.Control
                   type="text"
@@ -59,7 +59,7 @@ export const SearchPodcast = ({ setPodcasts }) => {
           </Row>
 
           <Row className="mb-1 justify-content-center">
-            <Col md={6}>
+            <Col md={5}>
               <FloatingLabel
                 controlId="formCountry"
                 label="Country"
@@ -79,7 +79,7 @@ export const SearchPodcast = ({ setPodcasts }) => {
 
           <Row className="justify-content-center">
             <Col md="auto">
-              <Button variant="outline-success" size="lg" type="submit">
+              <Button variant="outline-light" size="lg" type="submit">
                 Search
               </Button>
             </Col>

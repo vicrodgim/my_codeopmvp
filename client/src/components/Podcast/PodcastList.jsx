@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./Podcastlist.css";
 
 export const PodcastList = ({ podcasts, handlePodcastClick }) => {
   return (
@@ -26,7 +27,7 @@ export const PodcastList = ({ podcasts, handlePodcastClick }) => {
                   borderRadius: "10px",
                 }}
               />
-              <h5 className="mt-4">{podcast.name}</h5>
+              <h5 className="podcast-text">{podcast.name}</h5>
             </Col>
           );
         })}

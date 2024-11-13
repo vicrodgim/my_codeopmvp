@@ -1,0 +1,14 @@
+.my-banner {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+.my-logo {
+  margin-top: 50px;
+  width: 300px;
+  height: auto;
+}

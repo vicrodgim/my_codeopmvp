@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { BannerSearchPage } from "../components/Podcast/BannerSearchPage";
 import { SearchPodcast } from "../components/Podcast/SearchPodcast";
 import { PodcastList } from "../components/Podcast/PodcastList";
 import { DisplayPodcast } from "../components/Podcast/DisplayPodcast";
 import axios from "axios";
+import "./SearchPage.css";
 
 export const SearchPage = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -45,7 +47,8 @@ export const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className="search-page-background">
+      <BannerSearchPage />
       <SearchPodcast setPodcasts={setPodcasts} />
       <PodcastList
         podcasts={podcasts}

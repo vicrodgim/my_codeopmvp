@@ -29,13 +29,7 @@ export const FavoritesPage = () => {
     try {
       const response = await axios.put(
         `http://localhost:4000/api/favorites/${id}/rating`,
-        { rating },
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { rating }
       );
       return response.data;
     } catch (error) {

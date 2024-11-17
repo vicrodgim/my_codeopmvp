@@ -1,12 +1,10 @@
 require("dotenv").config();
 const axios = require("axios");
 
-//get spotify acess token
 const getAccessToken = async (req, res) => {
   const client_id = process.env.CLIENT_ID;
   const client_secret = process.env.CLIENT_SECRET;
 
-  //combine clientid and secret and convert the string into buffer(handle binary data), toString ("base64")converts buffer into a base64 encoded string
   try {
     const response = await axios.post(
       "https://accounts.spotify.com/api/token",
@@ -23,11 +21,7 @@ const getAccessToken = async (req, res) => {
       }
     );
 
-    // console.log(response);
-    // console.log(response.data);
     const accessToken = response.data.access_token;
-
-    //send the response with the access token
 
     res.json({ accessToken });
   } catch (error) {
@@ -39,21 +33,14 @@ const getAccessToken = async (req, res) => {
 //search for podcasts
 
 const searchPodcasts = async (req, res) => {
-  //query parameters
   const { topic, market } = req.query;
-  // console.log(req.query);
-  //first, access token must be fetched
-  console.log("aaa");
+
   try {
     const responseToken = await axios.get(
       "http://localhost:4000/api/spotify/token"
     );
-    // console.log(responseToken);
-    // console.log(responseToken.data);
 
     const accessToken = responseToken.data.accessToken;
-
-    console.log(accessToken);
 
     const spotifyResponse = await axios.get(
       "https://api.spotify.com/v1/search",
@@ -64,7 +51,7 @@ const searchPodcasts = async (req, res) => {
         params: {
           q: topic,
           type: "show",
-          market: market || "US", //default
+          market: market || "US",
           limit: 6,
         },
       }

@@ -1,22 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import { BannerSearchPage } from "../components/Podcast/BannerSearchPage";
 import { SearchPodcast } from "../components/Podcast/SearchPodcast";
 import { PodcastList } from "../components/Podcast/PodcastList";
 import { DisplayPodcast } from "../components/Podcast/DisplayPodcast";
-import axios from "axios";
 import "./SearchPage.css";
 
 export const SearchPage = () => {
   const [podcasts, setPodcasts] = useState([]);
   const [selectedPodcast, setSelectedPodcast] = useState(null);
 
-  const handlePodcastClick = (podcast) => {
-    // console.log("selected podcast:", podcast);
+  const displayRef = useRef(null);
 
+  useEffect(() => {
+    if (selectedPodcast && displayRef.current) {
+      displayRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedPodcast]);
+
+  const handlePodcastClick = (podcast) => {
     setSelectedPodcast(podcast);
   };
-
-  //adds podcasts to database
 
   const addFavorites = async (podcast) => {
     try {
@@ -40,9 +46,13 @@ export const SearchPage = () => {
   const handleAddFavorites = async (podcast) => {
     try {
       await addFavorites(podcast);
-      alert("Podcast has been added to favorites!");
+      toast.success("Podcast has been added to favorites!", {
+        autoClose: 3000,
+      });
     } catch (error) {
-      alert("Could not add to favorites. Please try again");
+      toast.error("Could not add to favorites. Please try again", {
+        autoClose: 3000,
+      });
     }
   };
 
@@ -54,12 +64,15 @@ export const SearchPage = () => {
         podcasts={podcasts}
         handlePodcastClick={handlePodcastClick}
       />
-      {selectedPodcast && (
-        <DisplayPodcast
-          selectedPodcast={selectedPodcast}
-          handleAddFavorites={handleAddFavorites}
-        />
-      )}
+      <div ref={displayRef}>
+        {selectedPodcast && (
+          <DisplayPodcast
+            selectedPodcast={selectedPodcast}
+            handleAddFavorites={handleAddFavorites}
+          />
+        )}
+      </div>
+      <ToastContainer />
     </div>
   );
 };

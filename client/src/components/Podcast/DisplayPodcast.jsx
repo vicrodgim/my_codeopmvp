@@ -11,13 +11,7 @@ export const DisplayPodcast = ({ selectedPodcast, handleAddFavorites }) => {
           variant="top"
           src={selectedPodcast.images?.[0].url}
           alt={selectedPodcast.name}
-          style={{
-            width: "160px",
-            height: "160px",
-            objecFit: "cover",
-            marginBottom: "30px",
-            marginTtop: "30px",
-          }}
+          className="card-img"
         />
         <Card.Title className="card-title">{selectedPodcast.name}</Card.Title>
         <Card.Text className="card-text">

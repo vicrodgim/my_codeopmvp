@@ -20,12 +20,7 @@ export const PodcastList = ({ podcasts, handlePodcastClick }) => {
               <img
                 src={podcast.images?.[0]?.url}
                 alt={podcast.name}
-                className="podcast-image"
-                style={{
-                  width: "80%",
-                  cursor: "pointer",
-                  borderRadius: "10px",
-                }}
+                className="podcast-img"
               />
               <h5 className="podcast-text">{podcast.name}</h5>
             </Col>

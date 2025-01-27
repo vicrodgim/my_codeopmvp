@@ -1,7 +1,4 @@
-// import the DB pool from your config folder
 const pool = require("../config/db");
-
-// Add podcast to fav list
 
 const addPodcast = async (req, res) => {
   const { spotify_id, title, description, cover_image } = req.body;
@@ -23,26 +20,22 @@ const addPodcast = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({
-      error: "An error occurred while creating a podcast",
+      error: "An error occurred while adding a podcast",
     });
   }
 };
 
-//get all podcasts
 const getPodcasts = async (req, res) => {
   try {
     const [podcasts] = await pool.query("SELECT * FROM favorites");
-
     return res.status(200).json({ podcasts });
   } catch (error) {
     console.error(error);
     return res
       .status(500)
-      .json({ error: "An error occurred while fetching podcasts" });
+      .json({ error: "An error occurred while fetching the podcasts" });
   }
 };
-
-//get podcast
 
 const getPodcast = async (req, res) => {
   const { id } = req.params;
@@ -52,7 +45,7 @@ const getPodcast = async (req, res) => {
 
     if (rows.length === 0) {
       return res.status(404).json({
-        error: "An error occurred while fetching podcast",
+        error: "An error occurred while fetching the podcast",
       });
     }
 
@@ -67,8 +60,6 @@ const getPodcast = async (req, res) => {
     });
   }
 };
-
-//update rating
 
 const addRating = async (req, res) => {
   const { id } = req.params;
@@ -106,21 +97,17 @@ const addRating = async (req, res) => {
   }
 };
 
-//delete podcast
-
 const deletePodcast = async (req, res) => {
   const { id } = req.params;
-
   try {
     const [result] = await pool.query("DELETE FROM favorites WHERE id=?", [id]);
-
     if (result.affectedRows === 0) {
       return res.status(404).json({
         error: "Podcast does not exist",
       });
     }
     return res.status(200).json({
-      messae: "Successfully deleted podcast",
+      message: "Successfully deleted the podcast",
     });
   } catch (error) {
     console.error("Error deleting podcast", error);

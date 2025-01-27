@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FavoriteList } from "../components/FavoritePodcast/FavoriteList";
 
@@ -46,10 +48,14 @@ export const FavoritesPage = () => {
           podcast.id === id ? { ...podcast, rating } : podcast
         )
       );
-      alert("Rating has been updated!");
+      toast.success("Rating has been updated!", {
+        autoClose: 2000,
+      });
     } catch (error) {
       console.error("Could not update podcast rating:", error);
-      alert("Could not updated rating. Please try again.");
+      toast.error("Could not updated rating. Please try again.", {
+        autoClose: 2000,
+      });
     }
   };
 
@@ -71,10 +77,14 @@ export const FavoritesPage = () => {
       setFavorites((oldFavorites) =>
         oldFavorites.filter((podcast) => podcast.id !== id)
       );
-      alert("Podcast was removed from favorites!");
+      toast.success("Podcast was removed from favorites!", {
+        autoClose: 2000,
+      });
     } catch (error) {
       console.error("Could not delete podcast:", error);
-      alert("Could not delete podcast. Please try again.");
+      toast.error("Could not delete podcast. Please try again.", {
+        autoClose: 2000,
+      });
     }
   };
 
@@ -89,6 +99,7 @@ export const FavoritesPage = () => {
       ) : (
         <p>No favorited added</p>
       )}
+      <ToastContainer />
     </div>
   );
 };

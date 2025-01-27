@@ -30,8 +30,6 @@ const getAccessToken = async (req, res) => {
   }
 };
 
-//search for podcasts
-
 const searchPodcasts = async (req, res) => {
   const { topic, market } = req.query;
 

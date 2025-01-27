@@ -5,3 +5,9 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
+.podcast-img {
+  width: 80%;
+  cursor: pointer;
+  border-radius: 10px;
+}

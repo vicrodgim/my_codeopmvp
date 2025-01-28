@@ -1,0 +1,18 @@
+.loginsignup-input {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.loginsignup::placeholder {
+  color: #aaa;
+  font-style: normal;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.loginsignup:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+  outline: none;
+}

@@ -2,11 +2,13 @@ const pool = require("../config/db");
 
 const addPodcast = async (req, res) => {
   const { spotify_id, title, description, cover_image } = req.body;
+  const user_id = req.user_id;
+  console.log("User ID:", req.user_id);
 
   try {
     const [podcast] = await pool.query(
-      "INSERT INTO favorites(spotify_id, title, description, cover_image) VALUES (?,?,?,?)",
-      [spotify_id, title, description, cover_image]
+      "INSERT INTO favorites(spotify_id, title, description, cover_image, user_id) VALUES (?,?,?,?,?)",
+      [spotify_id, title, description, cover_image, user_id]
     );
 
     return res.status(201).json({
@@ -15,19 +17,25 @@ const addPodcast = async (req, res) => {
         title,
         description,
         cover_image,
+        user_id,
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error("ERROR ADDING PODCAST:", error);
     return res.status(500).json({
       error: "An error occurred while adding a podcast",
+      datils: error.message,
     });
   }
 };
 
 const getPodcasts = async (req, res) => {
+  const user_id = req.user_id;
   try {
-    const [podcasts] = await pool.query("SELECT * FROM favorites");
+    const [podcasts] = await pool.query(
+      "SELECT * FROM favorites WHERE user_id = ?",
+      [user_id]
+    );
     return res.status(200).json({ podcasts });
   } catch (error) {
     console.error(error);
@@ -39,9 +47,13 @@ const getPodcasts = async (req, res) => {
 
 const getPodcast = async (req, res) => {
   const { id } = req.params;
+  const user_id = req.user_id;
 
   try {
-    const [rows] = await pool.query("SELECT * FROM favorites WHERE id=?", [id]);
+    const [rows] = await pool.query(
+      "SELECT * FROM favorites WHERE id=? AND user_id=?",
+      [id, user_id]
+    );
 
     if (rows.length === 0) {
       return res.status(404).json({
@@ -64,6 +76,7 @@ const getPodcast = async (req, res) => {
 const addRating = async (req, res) => {
   const { id } = req.params;
   const { rating } = req.body;
+  const user_id = req.user_id;
   if (!rating) {
     return res.status(400).json({
       error: "Rating is required to update the podcast",
@@ -72,8 +85,8 @@ const addRating = async (req, res) => {
 
   try {
     const [result] = await pool.query(
-      "UPDATE favorites SET rating = ? WHERE id =?",
-      [rating, id]
+      "UPDATE favorites SET rating = ? WHERE id =? AND user_id=?",
+      [rating, id, user_id]
     );
 
     if (result.affectedRows === 0) {
@@ -99,8 +112,13 @@ const addRating = async (req, res) => {
 
 const deletePodcast = async (req, res) => {
   const { id } = req.params;
+  const user_id = req.user_id;
+
   try {
-    const [result] = await pool.query("DELETE FROM favorites WHERE id=?", [id]);
+    const [result] = await pool.query(
+      "DELETE FROM favorites WHERE id=? AND user_id=?",
+      [id, user_id]
+    );
     if (result.affectedRows === 0) {
       return res.status(404).json({
         error: "Podcast does not exist",

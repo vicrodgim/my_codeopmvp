@@ -10,12 +10,19 @@ export const FavoritesPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchFavorites = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/favorites");
+        const response = await axios.get(
+          "http://localhost:4000/api/favorites",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const { podcasts } = response.data;
-
         setFavorites(podcasts);
       } catch (error) {
         console.error("Could not fetch favorites:", error);
@@ -28,10 +35,16 @@ export const FavoritesPage = () => {
   }, []);
 
   const postRating = async (id, rating) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
         `http://localhost:4000/api/favorites/${id}/rating`,
-        { rating }
+        { rating },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -42,7 +55,6 @@ export const FavoritesPage = () => {
   const handlePodcastRating = async (id, rating) => {
     try {
       const updatedPodcast = await postRating(id, rating);
-      //update  favorites podcast with  rating
       setFavorites((oldFavorites) =>
         oldFavorites.map((podcast) =>
           podcast.id === id ? { ...podcast, rating } : podcast
@@ -60,9 +72,15 @@ export const FavoritesPage = () => {
   };
 
   const deleteFavorites = async (id) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/favorites/${id}`
+        `http://localhost:4000/api/favorites/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       return response.data;

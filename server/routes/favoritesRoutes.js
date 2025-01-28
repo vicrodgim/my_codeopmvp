@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+const userShouldBeLoggedIn = require("../guard/userShouldBeLoggedIn");
+
 const {
   addPodcast,
   getPodcasts,
@@ -9,6 +11,7 @@ const {
   deletePodcast,
 } = require("../controllers/favoriteController");
 
+router.use(userShouldBeLoggedIn);
 router.post("/", addPodcast);
 router.get("/", getPodcasts);
 router.get("/:id", getPodcast);

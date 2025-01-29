@@ -83,6 +83,11 @@ export const LoginPage = ({ onLogin }) => {
           <Link to="/register" className="no-underline ms-2">
             Sign up
           </Link>
+          <div>
+            <Link to="/welcome" className="no-underline ms-2">
+              ←
+            </Link>
+          </div>
         </div>
       </form>
     </AuthLayout>

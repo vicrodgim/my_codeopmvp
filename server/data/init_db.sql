@@ -2,6 +2,8 @@
 -- Clear the tables if they already exists
 
 DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE IF NOT EXISTS `users`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 

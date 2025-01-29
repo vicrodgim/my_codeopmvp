@@ -60,6 +60,12 @@ export const SearchPage = () => {
       toast.success("Podcast has been added to favorites!", {
         autoClose: 3000,
       });
+      // setPodcasts((prevPodcasts) =>
+      //   prevPodcasts.filter((p) => p.id !== podcast.id)
+      // );
+
+      // Clear selected podcast only if it's the one being removed
+      setSelectedPodcast((prev) => (prev?.id === podcast.id ? null : prev));
     } catch (error) {
       toast.error("Could not add to favorites. Please try again", {
         autoClose: 3000,

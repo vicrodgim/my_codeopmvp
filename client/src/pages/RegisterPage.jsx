@@ -41,7 +41,7 @@ export const RegisterPage = () => {
 
       setSuccessMessage("Registration was successful! You can now log in.");
       setRegistrationData({ email: "", username: "", password: "" });
-      setTimeout(() => navigate("/login"), 2000);
+      navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
       setErrorMessage("Registration failed. Please try again.");
@@ -103,6 +103,11 @@ export const RegisterPage = () => {
           <Link to="/login" className="no-underline ms-2">
             Login
           </Link>
+          <div>
+            <Link to="/welcome" className="no-underline ms-2">
+              ←
+            </Link>
+          </div>
         </div>
       </form>
     </AuthLayout>

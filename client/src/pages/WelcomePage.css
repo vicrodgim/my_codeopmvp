@@ -1,0 +1,54 @@
+.background-homepage {
+  background-image: url("/auth-background.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.homepage {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage-box {
+  background-color: white;
+  padding: 50px;
+  border-radius: 50px;
+  max-width: 700px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 180px;
+}
+
+.homepage p {
+  margin: 20px 50px;
+  font-size: 18px;
+  color: black;
+  text-align: center;
+}
+
+.homepage h1 {
+  font-size: 80px !important;
+}
+
+.hmpg-nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+button.welcome-btn:hover {
+  background-color: #6c5872;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}

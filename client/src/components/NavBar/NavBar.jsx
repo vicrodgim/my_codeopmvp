@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import "./NavBar.css";
 
 export const NavBar = ({ onLogout }) => {
   return (
@@ -28,10 +29,8 @@ export const NavBar = ({ onLogout }) => {
           </Nav>
           <Nav className="ms-auto">
             <Button
-              as={Link}
-              to="/login"
               variant="outline-secondary"
-              className="rounded-pill"
+              className="rounded-pill w-100 logout-btn"
               onClick={onLogout}
             >
               Log out

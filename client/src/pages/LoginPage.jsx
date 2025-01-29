@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthLayout } from "../components/AuthForm/AuthLayout";
 import { FormInput } from "../components/AuthForm/FormInput";
+import Button from "react-bootstrap/Button";
+import "./LoginPage.css";
 
 export const LoginPage = ({ onLogin }) => {
   const [credentials, setCredentials] = useState({
@@ -46,7 +48,7 @@ export const LoginPage = ({ onLogin }) => {
   return (
     <AuthLayout>
       <form onSubmit={login}>
-        <h2>Login</h2>
+        <h2 className="title-login">Login</h2>
         {errorMessage && <div className="alert alert-danger"></div>}
         <FormInput
           id="username"
@@ -61,19 +63,21 @@ export const LoginPage = ({ onLogin }) => {
         <FormInput
           id="password"
           label="Password"
+          type="password"
           value={credentials.password}
           onChange={handleChange}
           placeholder="Password"
           required
           inputClassName="loginsignup-input"
         />
-        <button
+        <Button
           type="submit"
-          className="btn btn-primary custom-btn w-100"
+          variant="outline-secondary"
+          className="rounded-pill w-100 login-btn"
           disabled={loading}
         >
           {loading ? "Logging in..." : "Log in"}
-        </button>
+        </Button>
         <div className="text-center mt-3">
           <span>Don't have an account?</span>
           <Link to="/register" className="no-underline ms-2">

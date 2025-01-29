@@ -18,7 +18,8 @@ export const DisplayPodcast = ({ selectedPodcast, handleAddFavorites }) => {
           {selectedPodcast.description}
         </Card.Text>
         <Button
-          variant="dark"
+          variant="outline-secondary"
+          className="rounded-pill logout-btn add-btn"
           onClick={() => handleAddFavorites(selectedPodcast)}
         >
           Add to Favorites

@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthLayout } from "../components/AuthForm/AuthLayout";
 import { FormInput } from "../components/AuthForm/FormInput";
+import Button from "react-bootstrap/Button";
+import "./RegisterPage.css";
 
 export const RegisterPage = () => {
   const [registrationData, setRegistrationData] = useState({
@@ -51,7 +53,7 @@ export const RegisterPage = () => {
   return (
     <AuthLayout>
       <form onSubmit={register}>
-        <h2 className="form-title">Signup</h2>
+        <h2 className="title-register">Signup</h2>
         {errorMessage && (
           <div className="alert alert-danger text-center">{errorMessage}</div>
         )}
@@ -88,13 +90,14 @@ export const RegisterPage = () => {
           required
           inputClassName="loginsignup-input"
         />
-        <button
+        <Button
           type="submit"
-          className="btn btn-primary custom-btn w-100"
+          variant="outline-secondary"
+          className="rounded-pill w-100 login-btn"
           disabled={loading}
         >
           {loading ? "Signing up..." : "Sign up"}
-        </button>
+        </Button>
         <div className="text-center mt-3">
           <span>Already have an account?</span>
           <Link to="/login" className="no-underline ms-2">

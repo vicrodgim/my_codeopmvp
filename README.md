@@ -1,92 +1,181 @@
-# In the Loop
+# InTheLoop
 
-This project is a React-based web application that allows users to search for podcasts, add them to favorites, rate them, and delete them.
+## Project Overview
+
+**InTheLoop** is a full-stack podcast app that helps users stay up-to-date with trending news and discussions. Users can search for podcasts by topics and countries, add them to their favorites, and manage their podcast collection.
 
 ## Features
 
-- Search Podcasts: users can search for podcasts by topic and country using the Spotify API
-- Favorite Podcasts: users can add podcasts to their favorites list.
-- Rate Podcasts: users can rate their favorite podcasts from 1 to 5.
-- Delete favorites: users can remove podcasts from their favorite list.
+- Search for podcasts using the Spotify API
+- Add podcasts to a favorites list
+- Rate favorite podcasts
+- Remove podcasts from favorites
+- User authentication (Register/Login)
 
-## Technologies used
+## Tech Stack
 
-Frontend:
+### Back End
 
-1. React
-2. React Router
-3. Axios
-4. React Bootstrap
-5. CSS
-6. CodePen
+- **Node.js / Express.js** (API Server)
+- **MySQL2** (Database)
+- **Axios** (HTTP Requests)
+- **bcrypt** (Password hashing)
+- **JSON Web Tokens (JWT)** for authentication
+- **dotenv** (Environment variable management)
 
-Backend:
+### Front End
 
-1. Node.js
-2. Express.js
-3. MySQL
-4. Spotify API
-5. Postman
+- **React.js**
+- **React Router**
+- **Bootstrap** (for UI components)
+- **Axios** (for API requests)
+- **CSS** for styling
 
-## File Structure
+## Installation & Setup
 
-src/
-├── components/
-│ ├── FavoritePodcast/
-│ │ ├── FavoriteList.css  
-│ │ ├── FavoriteList.jsx #Component to display the favorite podcasts list
-│ │
-│ ├── NavBar/
-│ │ ├── NavBar.jsx # Component for the navigation bar
-│ │
-│ ├── Podcast/
-│ ├── BannerSearch.css  
-│ ├── BannerSearch.jsx # Component for the banner
-│ ├── DisplayPodcast.css  
-│ ├── DisplayPodcast.jsx # Component to display podcast details
-│ ├── PodcastList.css  
-│ ├── PodcastList.jsx # Component to display a list of podcasts
-│ ├── SearchPodcast.css  
-│ ├── SearchPodcast.jsx # Component for searching podcasts
-│
-├── pages/
-│ ├── SearchPage.jsx # Page container for searching podcasts
-│ ├── FavoritesPage.jsx # Page container for managing favorite podcasts
+### Clone the Repository
 
-## Endpoints Favorites
+```sh
+git clone https://github.com/vicrodgim/my_codeopmvp.git
+```
 
-### Add a Podcast to favorites
+### Database Setup
 
-/api/favorites
+Access MySQL in your terminal:
 
-### Get a Single Podcast
+```sh
+mysql -u root -p
+```
 
-/api/favorites/:id
+Run the SQL scripts located in `server/data/init_db.sql` to create the database and tables.
 
-### Add a Rating to a Podcast
+Run database migrations:
 
-/api/favorites/:id/rating
+```sh
+npm run migrate
+```
 
-### Delete a Podcast from Favorites
+### Back-End Setup
 
-/api/favorites/:id
+Navigate to the server directory:
 
-## Spotify API
+```sh
+cd server
+```
 
-### Get Spotify access token
+Install dependencies:
 
-/api/spotify/token
+```sh
+npm install
+```
 
-### Search Podcast
+Create a `.env` file and add the following environment variables:
 
-/api/spotify/search
+```sh
+# Database Configuration
+DB_HOST=localhost
+DB_NAME=codeopmvp
+DB_USERNAME=root
+DB_PASSWORD=yourpassword
 
-## Running the Project
+# Authentication Secret
+SUPER_SECRET=your_secret_key
 
-### Server
+# Spotify API Credentials
+CLIENT_ID=your_spotify_client_id
+CLIENT_SECRET=your_spotify_client_secret
+```
 
+Start the server:
+
+```sh
 npm run start
+```
 
-### Client
+The server will run on [http://localhost:4000](http://localhost:4000)
 
+### Front-End Setup
+
+Navigate to the client directory:
+
+```sh
+cd client
+```
+
+Install dependencies:
+
+```sh
+npm install
+```
+
+Start the React application:
+
+```sh
 npm run dev
+```
+
+The app will run on [http://localhost:5173](http://localhost:5173)
+
+## API Endpoints
+
+### Authentication
+
+- `POST /api/auth/register` → Registers a new user
+- `POST /api/auth/login` → Logs in and returns a JWT token
+- `GET /api/auth/profile` → Retrieves the logged-in user's profile
+
+### Spotify API
+
+- `GET /api/spotify/token` → Fetches an access token
+- `GET /api/spotify/search?topic={topic}&market={country}` → Searches for podcasts
+  - `market` should be a two-letter country code (e.g., US, IT, FR)
+
+### Favorites
+
+- `POST /api/favorites` → Adds a podcast to favorites
+- `GET /api/favorites` → Fetches all favorite podcasts
+- `GET /api/favorites/:id` → Fetches a specific podcast
+- `PUT /api/favorites/:id/rating` → Adds a rating to a podcast
+- `DELETE /api/favorites/:id` → Deletes a podcast from favorites
+
+## Project Structure
+
+### Backend Structure
+
+server/
+│── bin/ # Server entry point
+│── config/ # Database configuration
+│── controllers/ # Business logic
+│── data/ # Database initialization scripts
+│── guard/ # Authentication middleware
+│── public/ # Public assets (if needed)
+│── routes/ # API route handlers
+│── .env # Environment variables (ignored in Git)
+│── .gitignore # Git ignore file
+
+### Client-Side Structure
+
+client/
+│── src/
+│ ├── components/ # Reusable UI components
+│ │ ├── AuthForm/ # Authentication components (Login, Register)
+│ │ ├── FavoritePodcast/ # Favorite podcast components
+│ │ ├── NavBar/ # Navigation bar component
+│ │ ├── Podcast/ # Podcast search and display components
+│ ├── pages/ # Full-page components (Login, Register, Search, Favorites, etc.)
+│ ├── assets/ # Static assets like images
+│── .gitignore # Git ignore file
+│── package.json # Project dependencies and scripts
+│── README.md # Project documentation
+
+## Usage Instructions
+
+1. **Search for Podcasts:** Enter a topic and country to fetch relevant podcasts.
+   - Use a two-letter country code for the market parameter (e.g., US, IT, FR).
+2. **Add to Favorites:** Click "Add to Favorites" to save podcasts.
+3. **Rate a Podcast:** Assign a rating to favorite podcasts.
+4. **Remove from Favorites:** Click "Delete" to remove a podcast from the list.
+
+## Notes
+
+This project was created as part of the **CodeOp Full-Stack Development Bootcamp**. It's an MVP project demonstrating CRUD operations, authentication, and API integration with Spotify.
